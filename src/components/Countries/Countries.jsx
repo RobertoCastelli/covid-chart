@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { fetchData } from "../fetchData";
 
-const Countries = () => {
+const Countries = ({ handleCountryChange }) => {
   //--> State
   const [fetchedCountries, setFetchedCountries] = useState(null);
 
@@ -11,7 +11,7 @@ const Countries = () => {
   //--> Fetch countries data
   useEffect(() => {
     const fetchDataTemp = async () => {
-      //--> Deconstructoring data in fetch function
+      //--> Deconstructoring data in fetch function (took time to figure this out)
       const { countries } = await fetchData(url);
       setFetchedCountries(countries);
     };
@@ -26,10 +26,14 @@ const Countries = () => {
   //--> Render
   return (
     <div>
-      <select>
+      <select onChange={(e) => handleCountryChange(e.target.value)}>
         <option value="global">Global</option>
-        {fetchedCountries.map((country) => {
-          return <option key={country.name}>{country.name}</option>;
+        {fetchedCountries.map((country, id) => {
+          return (
+            <option key={id} value={country.name}>
+              {country.name}
+            </option>
+          );
         })}
       </select>
     </div>

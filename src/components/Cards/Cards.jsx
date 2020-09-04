@@ -5,12 +5,15 @@ import { RiVirusFill } from "react-icons/ri";
 import { fetchData } from "../fetchData";
 import CountUp from "react-countup";
 
-const Cards = () => {
+const Cards = ({ country }) => {
   //--> States
   const [fetchedData, setFetchedData] = useState(null);
 
-  //--> URLs
-  const url = "https://covid19.mathdro.id/api";
+  //--> Get URL based on Global & Country
+  let url;
+  country === "Global"
+    ? (url = "https://covid19.mathdro.id/api")
+    : (url = `https://covid19.mathdro.id/api/countries/${country}`);
 
   //--> Fetch main data
   useEffect(() => {
@@ -19,7 +22,7 @@ const Cards = () => {
       setFetchedData(data);
     };
     fetchDataTemp();
-  }, []);
+  }, [url]);
 
   //--> Show Loading... while fetching data
   if (fetchedData === null) {
