@@ -1,13 +1,9 @@
-const url = "https://covid19.mathdro.id/api";
-
-export const fetchData = async () => {
+export const fetchData = async (url) => {
   try {
     const response = await fetch(url);
     const data = await response.json();
     return data;
   } catch (error) {
-    console.log(error);
-  } finally {
-    console.log("finally");
+    console.log(`error message: ${error.message}`);
   }
 };

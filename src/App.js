@@ -10,12 +10,14 @@ function App() {
   //--> States
   const [fetchedData, setFetchedData] = useState(null);
 
+  //--> URLs
+  const mainUrl = "https://covid19.mathdro.id/api";
+
   //--> Fetch main data from https://covid19.mathdro.id/api
   useEffect(() => {
     const fetchDataTemp = async () => {
-      const data = await fetchData();
+      const data = await fetchData(mainUrl);
       setFetchedData(data);
-      console.log(fetchedData); // <-<< Delete this
     };
     fetchDataTemp();
   }, []);
@@ -23,7 +25,7 @@ function App() {
   return (
     <div className="container">
       <div className="content">
-        <Header />
+        <Header data={fetchedData} />
         <Cards data={fetchedData} />
         <Countries />
         <Charts />
