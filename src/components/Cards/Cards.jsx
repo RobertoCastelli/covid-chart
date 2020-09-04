@@ -1,16 +1,35 @@
-import React from "react";
-import CountUp from "react-countup";
+import React, { useState, useEffect } from "react";
 import { FaSkullCrossbones } from "react-icons/fa";
 import { RiMentalHealthLine } from "react-icons/ri";
 import { RiVirusFill } from "react-icons/ri";
+import { fetchData } from "../fetchData";
+import CountUp from "react-countup";
 
-const Cards = ({ data }) => {
+const Cards = () => {
+  //--> States
+  const [fetchedData, setFetchedData] = useState(null);
+
+  //--> URLs
+  const url = "https://covid19.mathdro.id/api";
+
+  //--> Fetch main data
+  useEffect(() => {
+    const fetchDataTemp = async () => {
+      const data = await fetchData(url);
+      setFetchedData(data);
+    };
+    fetchDataTemp();
+  }, []);
+
   //--> Show Loading... while fetching data
-  if (data === null) {
+  if (fetchedData === null) {
     return <h3 className="loading">Loading...</h3>;
   }
-  const { confirmed, deaths, recovered } = data;
 
+  //--> Destructuring data
+  const { confirmed, deaths, recovered } = fetchedData;
+
+  //--> Render
   return (
     <div>
       <ul>
