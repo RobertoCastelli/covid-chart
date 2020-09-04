@@ -1,6 +1,6 @@
 ## COVID TRACKER w/ ChartJS
 
-> Covid API fetch witha a nice synoptic Chart
+> Second version of my Covid API fetch with a nice synoptic Chart
 
 Enjoy!
 
