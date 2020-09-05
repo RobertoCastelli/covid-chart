@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { fetchData } from "../fetchData";
 
-const Countries = ({ handleCountryChange }) => {
+const Countries = ({ countryChange }) => {
   //--> State
   const [fetchedCountries, setFetchedCountries] = useState(null);
 
@@ -26,7 +26,7 @@ const Countries = ({ handleCountryChange }) => {
   //--> Render
   return (
     <div>
-      <select onChange={(e) => handleCountryChange(e.target.value)}>
+      <select onChange={(e) => countryChange(e.target.value)}>
         <option value="global">Global</option>
         {fetchedCountries.map((country, id) => {
           return (
